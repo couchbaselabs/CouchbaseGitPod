@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 
 RUN apt-get -qq update && \
     apt-get install -yq runit wget chrpath tzdata \
-    lsof lshw sysstat net-tools numactl bzip2 maven default-jdk && \
+    lsof lshw sysstat net-tools numactl bzip2 && \
     apt-get autoremove && apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -15,8 +15,8 @@ RUN groupadd -g 1000 couchbase && useradd couchbase -u 1000 -g couchbase -M
 
 RUN mkdir -p /tmp/couchbase && \
     cd /tmp/couchbase && \
-    wget https://packages.couchbase.com/releases/7.0.0-beta/couchbase-server-enterprise_7.0.0-beta-ubuntu20.04_amd64.deb && \
-    dpkg -i ./couchbase-server-enterprise_7.0.0-beta-ubuntu20.04_amd64.deb
+    wget http://packages.couchbase.com/releases/6.6.2/couchbase-server-enterprise_6.6.2-ubuntu20.04_amd64.deb && \
+    dpkg -i ./couchbase-server-enterprise_6.6.2-ubuntu20.04_amd64.deb
 
 RUN sed -i -e '1 s/$/\/docker/' /opt/couchbase/VARIANT.txt
 
